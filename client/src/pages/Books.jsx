@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"
+import axios from "axios";
 
-const Books = () =>{
+const Books = () => {
+  const [books, setBooks] = useState([]);
 
-    const [books,setBooks] = useState([])
+  useEffect(() => {
+    const fetchAllBooks = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/books");
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-    useEffect(()=>{
-        const fecthAllBooks = async()=>{
-    try{
-        const res = await axios.get("http:localhost:8800/books")
-        console.log(res)
-    }
-    catch(err){
-        console.log(err)
-    }
-}
+    fetchAllBooks();
+  }, []);
 
-fetchAllBooks()
-},[])
+  return <div>Books</div>;
+};
 
-    return(
-        <div>Books</div>
-    )
-}
-
-export default Books
+export default Books;
